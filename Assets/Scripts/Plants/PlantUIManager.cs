@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class PlantUIManager : MonoBehaviour
 {
     [SerializeField] private Image healthBar;
-    [SerializeField] private GameObject tooltip;
 
     public void UpdateHealthBar(int currentHealth)
     {
