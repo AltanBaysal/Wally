@@ -15,20 +15,4 @@ public class PlantUIManager : MonoBehaviour
         }
     }
 
-    public void ShowTooltip(string info)
-    {
-        if (tooltip != null)
-        {
-            tooltip.SetActive(true);
-            tooltip.GetComponentInChildren<Text>().text = info; // Assuming tooltip has a Text component for displaying info
-        }
-    }
-
-    public void HideTooltip()
-    {
-        if (tooltip != null)
-        {
-            tooltip.SetActive(false);
-        }
-    }
 }
