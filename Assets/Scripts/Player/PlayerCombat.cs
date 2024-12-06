@@ -6,7 +6,7 @@ public class PlayerCombat : MonoBehaviour
     [Header("Combat Settings")]
     [SerializeField] private float weaponRange = 5f;
     [SerializeField] private float attackCooldown = 1f;
-    private Weapon currentWeapon;
+    private PlayerCombat currentWeapon;
     private float lastAttackTime;
 
     private void Update()
@@ -23,7 +23,7 @@ public class PlayerCombat : MonoBehaviour
         // Trigger the attack animation
         if (currentWeapon != null)
         {
-            currentWeapon.TriggerAttackAnimation();
+            //currentWeapon.TriggerAttackAnimation();
             DamageEnemiesInRange();
             lastAttackTime = Time.time;
         }
@@ -34,18 +34,18 @@ public class PlayerCombat : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, weaponRange);
         foreach (Collider hitCollider in hitColliders)
         {
-            Enemy enemy = hitCollider.GetComponent<Enemy>();
+            EnemyController enemy = hitCollider.GetComponent<EnemyController>();
             if (enemy != null)
             {
-                enemy.DealDamage(currentWeapon.GetDamage());
+                //enemy.DealDamage(currentWeapon.GetDamage());
             }
         }
     }
 
-    public void EquipWeapon(Weapon newWeapon)
+    public void EquipWeapon(PlayerCombat newWeapon)
     {
         currentWeapon = newWeapon;
-        ChangeAnimationState(currentWeapon.GetAnimationState());
+        //ChangeAnimationState(currentWeapon.GetAnimationState());
     }
 
     private void ChangeAnimationState(string newState)

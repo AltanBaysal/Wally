@@ -24,8 +24,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         HideAlert();
-        WaveManager.OnWaveChange += OnWaveChange;
-        ResourceManager.OnResourceChange += OnResourceChange;
+        //WaveManager.OnWaveChange += OnWaveChange;
+        //ResourceManager.OnResourceChange += OnResourceChange;
     }
 
     public void UpdateResourceDisplay()
@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
         alertMessageText.text = message;
         alertPanel.SetActive(true);
         alertActive = true;
-        AudioManager.PlayNotificationSound();
+        //AudioManager.PlayNotificationSound();
         uiAnimationController.SetTrigger("AlertTrigger");
     }
 
@@ -64,22 +64,22 @@ public class UIManager : MonoBehaviour
 
     public void OnResourceChange()
     {
-        bambooCount = ResourceManager.GetBambooCount();
-        laurelCount = ResourceManager.GetLaurelCount();
-        pomegranateCount = ResourceManager.GetPomegranateCount();
-        oliveCount = ResourceManager.GetOliveCount();
+        //bambooCount = ResourceManager.GetBambooCount();
+        //laurelCount = ResourceManager.GetLaurelCount();
+        //pomegranateCount = ResourceManager.GetPomegranateCount();
+        //oliveCount = ResourceManager.GetOliveCount();
         UpdateResourceDisplay();
     }
 
     public void OnWaveChange()
     {
-        waveTimer = WaveManager.GetCurrentWaveTimer();
+        //waveTimer = WaveManager.GetCurrentWaveTimer();
         UpdateWaveTimerDisplay();
     }
 
     private void OnDestroy()
     {
-        WaveManager.OnWaveChange -= OnWaveChange;
-        ResourceManager.OnResourceChange -= OnResourceChange;
+        //WaveManager.OnWaveChange -= OnWaveChange;
+        //ResourceManager.OnResourceChange -= OnResourceChange;
     }
 }

@@ -47,7 +47,7 @@ public class EnemyAnimation : MonoBehaviour
     public void PlayAttackAnimation()
     {
         animator.SetTrigger("Attack");
-        SoundManager.Instance.PlayAttackSound();
+        //SoundManager.Instance.PlayAttackSound();
     }
 
     public void PlayDeathAnimation()

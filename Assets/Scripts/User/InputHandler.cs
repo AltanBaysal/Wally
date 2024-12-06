@@ -23,7 +23,7 @@ public class InputHandler : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 // Assuming the UIManager has a method to handle interactions
-                UIManager.Instance.HandleUIInteraction(hit.collider.gameObject);
+                ///UIManager.Instance.HandleUIInteraction(hit.collider.gameObject);
             }
         }
     }
@@ -35,7 +35,7 @@ public class InputHandler : MonoBehaviour
             position = Input.mousePosition
         };
 
-        var results = new List<RaycastResult>();
+        /*var results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, results);
 
         foreach (RaycastResult result in results)
@@ -50,6 +50,6 @@ public class InputHandler : MonoBehaviour
                     graphic.color = Color.yellow; // Hover color
                 }
             }
-        }
+        }*/
     }
 }

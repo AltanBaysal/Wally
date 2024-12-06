@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    [SerializeField] private Tool selectedTool;
+    [SerializeField] private PlayerInteraction selectedTool;
     [SerializeField] private float interactionRange = 5f;
 
     // Reference to UI Manager
@@ -25,11 +25,11 @@ public class PlayerInteraction : MonoBehaviour
         // Example input handling for selecting a tool (button presses)
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            ChangeTool(ToolManager.Instance.GetToolByID(1)); // Assuming ToolManager handles tools
+            //ChangeTool(ToolManager.Instance.GetToolByID(1)); // Assuming ToolManager handles tools
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            ChangeTool(ToolManager.Instance.GetToolByID(2));
+            //ChangeTool(ToolManager.Instance.GetToolByID(2));
         }
         // Add more as needed for additional tools
     }
@@ -43,17 +43,17 @@ public class PlayerInteraction : MonoBehaviour
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, interactionRange);
             foreach (var hitCollider in hitColliders)
             {
-                Resource resource = hitCollider.GetComponent<Resource>();
+                ResourceController resource = hitCollider.GetComponent<ResourceController>();
                 if (resource != null)
                 {
-                    selectedTool.ToolSpecificAction(resource);
+                    //selectedTool.ToolSpecificAction(resource);
                     break; // Perform action on the first resource found
                 }
             }
         }
     }
 
-    public void ChangeTool(Tool newTool)
+    public void ChangeTool(PlayerInteraction newTool)
     {
         selectedTool = newTool;
         UpdateToolUI();
@@ -63,7 +63,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (uiManager != null)
         {
-            uiManager.UpdateToolUI(selectedTool);
+            //uiManager.UpdateToolUI(selectedTool);
         }
     }
 }

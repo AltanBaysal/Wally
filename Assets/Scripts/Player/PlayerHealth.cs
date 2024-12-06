@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            gameManager.GameOver();
+            //gameManager.GameOver();
         }
     }
 
@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (uiManager != null)
         {
-            uiManager.UpdateHealthDisplay(currentHealth, maxHealth);
+            //uiManager.UpdateHealthDisplay(currentHealth, maxHealth);
         }
     }
 
@@ -54,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            gameManager.GameOver();
+            //gameManager.GameOver();
         }
     }
 }

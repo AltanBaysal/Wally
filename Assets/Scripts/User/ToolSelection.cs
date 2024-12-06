@@ -8,12 +8,12 @@ public class ToolSelection : MonoBehaviour
     [SerializeField] private List<string> toolList;
     [SerializeField] private Image selectedToolIcon;
     private int selectedToolIndex;
-    private ResourceManager resourceManager;
+    private ResourceController resourceManager;
     private UIManager uiManager;
 
     private void Awake()
     {
-        resourceManager = FindObjectOfType<ResourceManager>();
+        resourceManager = FindObjectOfType<ResourceController>();
         uiManager = FindObjectOfType<UIManager>();
     }
 
@@ -49,6 +49,7 @@ public class ToolSelection : MonoBehaviour
     {
         for (int i = 0; i < toolList.Count; i++)
         {
+            /*
             if (resourceManager.CanUseTool(toolList[i]))
             {
                 // Enable the tool in the UI
@@ -56,7 +57,7 @@ public class ToolSelection : MonoBehaviour
             else
             {
                 // Disable the tool in the UI
-            }
+            }*/
         }
     }
 }

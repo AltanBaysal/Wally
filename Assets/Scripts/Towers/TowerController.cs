@@ -42,7 +42,7 @@ public class TowerController : MonoBehaviour
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange);
         foreach (var enemyCollider in hitEnemies)
         {
-            Enemy enemy = enemyCollider.GetComponent<Enemy>();
+            EnemyController enemy = enemyCollider.GetComponent<EnemyController>();
             if (enemy != null && attackTimer >= attackCooldown)
             {
                 AttackEnemy(enemy);
@@ -51,7 +51,7 @@ public class TowerController : MonoBehaviour
         }
     }
 
-    private void AttackEnemy(Enemy target)
+    private void AttackEnemy(EnemyController target)
     {
         target.TakeDamage(damage);
         PlayAttackSound();
@@ -80,7 +80,7 @@ public class TowerController : MonoBehaviour
     private void PlayAttackSound()
     {
         // Assuming a SoundManager exists with a Play method
-        SoundManager.Instance.Play("TowerAttack");
+        //SoundManager.Instance.Play("TowerAttack");
     }
 
     private void OnDrawGizmosSelected()

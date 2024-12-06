@@ -32,7 +32,7 @@ public class ResourceController : MonoBehaviour
     }
 
     private void UpdateResourceCount()
-    {
+    {   /*
         PlayerUI playerUI = FindObjectOfType<PlayerUI>();
         if (playerUI != null)
         {
@@ -41,7 +41,7 @@ public class ResourceController : MonoBehaviour
         else
         {
             Debug.LogWarning("PlayerUI not found! Unable to update resource count.");
-        }
+        }*/
     }
 
     private void ChangeResourceAppearance()
@@ -55,7 +55,7 @@ public class ResourceController : MonoBehaviour
         AnimationController animationController = GetComponent<AnimationController>();
         if (animationController != null)
         {
-            animationController.PlayResourceAnimation(currentAmount, isCollectable);
+            //animationController.PlayResourceAnimation(currentAmount, isCollectable);
         }
     }
 }

@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class UserSoundManager : MonoBehaviour
 {
     [Header("Audio Clips")]
     [SerializeField] private AudioClip uiClickSound;

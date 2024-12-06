@@ -1,12 +1,6 @@
 
 using UnityEngine;
 
-public enum TowerType
-{
-    SingleTarget,
-    AoE
-}
-
 public class TowerSoundManager : MonoBehaviour
 {
     [Header("Audio Clips")]

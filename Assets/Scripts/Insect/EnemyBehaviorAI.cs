@@ -60,7 +60,7 @@ public class EnemyBehaviorAI : MonoBehaviour
     private bool IsPlayerNearby()
     {
         // Placeholder for detecting player proximity logic
-        return Vector3.Distance(transform.position, FindObjectOfType<Player>().transform.position) < 10f;
+        return Vector3.Distance(transform.position, FindObjectOfType<PlayerMovement>().transform.position) < 10f;
     }
 
     private void EnhanceStats()

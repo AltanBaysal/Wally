@@ -24,7 +24,7 @@ public class ResourceAnimation : MonoBehaviour
     {
         // Trigger collection animation
         animator.Play(collectionAnimation.name);
-        SoundManager.Instance.PlaySound("ResourceCollectionSound"); // Example sound method
+        //SoundManager.Instance.PlaySound("ResourceCollectionSound"); // Example sound method
     }
 
     public void PlayFallingAnimation()

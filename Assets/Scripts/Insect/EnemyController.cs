@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         PlayDeathAnimation();
-        SoundManager.Instance.PlaySound("EnemyDeath");
+        //SoundManager.Instance.PlaySound("EnemyDeath");
         Destroy(gameObject);
     }
 
