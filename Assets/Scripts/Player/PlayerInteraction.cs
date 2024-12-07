@@ -12,6 +12,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private PlayerCombat playerCombat;
     [SerializeField] private Planting planting;
     [SerializeField] public ResourceManager resourceManager;
+    [SerializeField] private GameObject towerPrefab;
 
     // Reference to UI Manager
     private UIManager uiManager;
@@ -62,6 +63,10 @@ public class PlayerInteraction : MonoBehaviour
                 Debug.Log("Using Bay Seed.");
                 planting.PlantSeed("bay");
                 break;
+            case 7:
+                addTower();
+                Debug.Log("Using Tower.");
+                break;
         }
     }
 
@@ -90,5 +95,18 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
         }
+    }
+    
+    private void addTower()
+    {
+        if (resourceManager.GetResourceAmount("bamboo") > 2 && resourceManager.GetResourceAmount("olive") > 2 && resourceManager.GetResourceAmount("pomegranate") > 2 && resourceManager.GetResourceAmount("bay") > 2)
+        {
+            Instantiate(towerPrefab, transform.position, Quaternion.identity);
+            resourceManager.UpdateResource("bamboo", -2);
+            resourceManager.UpdateResource("olive", -2);
+            resourceManager.UpdateResource("pomegranate", -2);
+            resourceManager.UpdateResource("bay", -2);
+        }
+        Debug.Log("Tower added at player position!");
     }
 }

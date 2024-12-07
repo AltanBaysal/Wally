@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 365cd4ec8ef8f1a4c9b62845b3c2360f, type: 3}
+  m_Sprite: {fileID: 8385315135864872518, guid: 8c6fba9a68017584ba2150efeff94de5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,9 +105,9 @@ MonoBehaviour:
   growthTime: 3
   isAlive: 1
   plantSpriteRenderer: {fileID: 727637900897335705}
-  seedSprite: {fileID: 21300000, guid: 365cd4ec8ef8f1a4c9b62845b3c2360f, type: 3}
-  sproutSprite: {fileID: 21300000, guid: 45bca6f3a7d3db94f9797233045f9bf4, type: 3}
-  matureSprite: {fileID: 21300000, guid: 4d1bee1749664ac48af1ed7ac4df8df3, type: 3}
+  seedSprite: {fileID: 8385315135864872518, guid: 8c6fba9a68017584ba2150efeff94de5, type: 3}
+  sproutSprite: {fileID: -4518874177370569874, guid: 21ed12abb10e5004aa81efea3c38e66c, type: 3}
+  matureSprite: {fileID: 2029637031335501887, guid: 4b7c122d1313628478e16bae289f8cf5, type: 3}
   plantName: olive
 --- !u!114 &9080999756905814786
 MonoBehaviour:
@@ -172,8 +172,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    pivot: {x: 0.5294118, y: -0.22727273}
+    oldSize: {x: 0.34, y: 0.44}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

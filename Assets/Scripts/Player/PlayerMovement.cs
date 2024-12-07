@@ -7,17 +7,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoving = false;
     private Vector2 currentDirection;
 
-    private Animator animator;
-
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
 
     private void Update()
     {
         Move();
-        ChangeAnimationState();
     }
 
     private void Move()
@@ -35,15 +28,5 @@ public class PlayerMovement : MonoBehaviour
     {
         currentDirection = newDirection.normalized;
         Move();
-    }
-
-    private void ChangeAnimationState()
-    {
-        if (animator != null)
-        {
-            animator.SetBool("isMoving", isMoving);
-            animator.SetFloat("moveX", currentDirection.x);
-            animator.SetFloat("moveY", currentDirection.y);
-        }
     }
 }

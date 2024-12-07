@@ -1,38 +1,27 @@
-
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    private Animator animator;
-    private string currentAnimationState = "idle";
+    public Animator animator;
+    private Vector2 currentDirection;
 
-    private void Awake()
+    private void Update()
     {
-        animator = GetComponent<Animator>();
+        // Get input and calculate movement
+        currentDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+
+        // Update animation based on movement
+        UpdateAnimation(currentDirection);
     }
 
-    public void ChangeAnimationState(string newState)
+    public void UpdateAnimation(Vector2 direction)
     {
-        if (currentAnimationState == newState) return;
+        // Set blend tree parameters
+        float horizontal = Mathf.Clamp(direction.x, -0.5f, 0.5f);
+        float vertical = Mathf.Clamp(direction.y, -0.5f, 0.5f);
 
-        animator.Play(newState);
-        currentAnimationState = newState;
-    }
+        animator.SetFloat("Horizontal", horizontal);
+        animator.SetFloat("Vertical", vertical);
 
-    public void UpdateAnimation(bool isMoving, string selectedTool)
-    {
-        if (isMoving)
-        {
-            ChangeAnimationState("moving");
-        }
-        else
-        {
-            ChangeAnimationState("idle");
-        }
-
-        if (selectedTool == "attack")
-        {
-            ChangeAnimationState("attacking");
-        }
     }
 }

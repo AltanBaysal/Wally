@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 365cd4ec8ef8f1a4c9b62845b3c2360f, type: 3}
+  m_Sprite: {fileID: 1878775719859258229, guid: 03fb423a3c020514f82518be812a577a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,9 +105,9 @@ MonoBehaviour:
   growthTime: 3
   isAlive: 1
   plantSpriteRenderer: {fileID: 8313561740291604700}
-  seedSprite: {fileID: 21300000, guid: 365cd4ec8ef8f1a4c9b62845b3c2360f, type: 3}
-  sproutSprite: {fileID: 21300000, guid: 45bca6f3a7d3db94f9797233045f9bf4, type: 3}
-  matureSprite: {fileID: 21300000, guid: 4d1bee1749664ac48af1ed7ac4df8df3, type: 3}
+  seedSprite: {fileID: 1878775719859258229, guid: 03fb423a3c020514f82518be812a577a, type: 3}
+  sproutSprite: {fileID: 632301650474345515, guid: 66afe3b2fe6057d46a5be1433c8f8bd6, type: 3}
+  matureSprite: {fileID: 1488727826467511434, guid: 3c05c423d17e0574b9df00686d6a6bcf, type: 3}
   plantName: pomegranate
 --- !u!114 &34338505875215491
 MonoBehaviour:
@@ -172,8 +172,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    pivot: {x: 0.5294118, y: -0.3255814}
+    oldSize: {x: 0.34, y: 0.43}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

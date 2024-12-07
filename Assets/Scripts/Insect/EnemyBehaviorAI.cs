@@ -12,7 +12,7 @@ public class EnemyBehaviorAI : MonoBehaviour
 {
     [SerializeField]
     private TargetChoice targetChoice = TargetChoice.Plant;
-    private GameObject currentTarget;
+    public GameObject currentTarget;
 
     [SerializeField]
     private float attackRange = 2.0f;
@@ -98,7 +98,6 @@ public class EnemyBehaviorAI : MonoBehaviour
     private bool IsTargetInRange()
     {
         if (currentTarget == null) return false;
-
         return Vector3.Distance(transform.position, currentTarget.transform.position) <= attackRange;
     }
 
