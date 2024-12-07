@@ -13,16 +13,16 @@ public class ResourceUI : MonoBehaviour
     {
         switch (resourceName)
         {
-            case "Bambu":
+            case "bamboo":
                 bambuText.text = $"{newAmount}";
                 break;
-            case "Olive":
+            case "olive":
                 oliveText.text = $"{newAmount}";
                 break;
-            case "Pomegranate":
+            case "pomegranate":
                 pomegranateText.text = $"{newAmount}";
                 break;
-            case "Bay":
+            case "bay":
                 bayText.text = $"{newAmount}";
                 break;
             default:

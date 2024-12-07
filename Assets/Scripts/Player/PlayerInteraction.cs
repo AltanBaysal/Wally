@@ -1,11 +1,16 @@
-
+﻿
 using System.Resources;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
-{
-    [SerializeField] private PlayerInteraction selectedTool;
+{ 
+
+    [SerializeField] private int selectedTool;
     [SerializeField] private float interactionRange = 5f;
+    [SerializeField] private ToolbarController toolbarController;
+    [SerializeField] private PlayerCombat playerCombat;
+    [SerializeField] private Planting planting;
+    [SerializeField] private ResourceManager resourceManager;
 
     // Reference to UI Manager
     private UIManager uiManager;
@@ -17,54 +22,45 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        CheckForToolSelection();
-        ActivateTool();
-    }
-
-    private void CheckForToolSelection()
-    {
-        // Example input handling for selecting a tool (button presses)
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetMouseButtonDown(0)) // Left mouse button
         {
-            //ChangeTool(ToolManager.Instance.GetToolByID(1)); // Assuming ToolManager handles tools
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            //ChangeTool(ToolManager.Instance.GetToolByID(2));
-        }
-        // Add more as needed for additional tools
-    }
-
-    private void ActivateTool()
-    {
-        if (selectedTool != null)
-        {
-            // Here you could check if a resource is within the interaction range
-            // and if so, call the ToolSpecificAction
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, interactionRange);
-            foreach (var hitCollider in hitColliders)
-            {
-                ResourceManager resource = hitCollider.GetComponent<ResourceManager>();
-                if (resource != null)
-                {
-                    //selectedTool.ToolSpecificAction(resource);
-                    break; // Perform action on the first resource found
-                }
-            }
+            UseTool();
         }
     }
 
-    public void ChangeTool(PlayerInteraction newTool)
+    private void UseTool()
     {
-        selectedTool = newTool;
-        UpdateToolUI();
-    }
-
-    private void UpdateToolUI()
-    {
-        if (uiManager != null)
+        int selectedIndex = toolbarController.selectedIndex;
+        switch (selectedIndex)
         {
-            //uiManager.UpdateToolUI(selectedTool);
+            case 0:
+                Debug.Log("Using Watering Can.");
+                // Sulama Animasyonu Çalıştır
+                break;
+            case 1:
+                Debug.Log("Using Sickle.");
+                // Add your logic here
+                break;
+            case 2:
+                Debug.Log("Using Gun.");
+                playerCombat.ShootBullet();
+                break;
+            case 3:
+                Debug.Log("Using Bamboo Seed.");
+                planting.PlantSeed("bamboo");
+                break;
+            case 4:
+                Debug.Log("Using Olive Seed.");
+                planting.PlantSeed("olive");
+                break;
+            case 5:
+                Debug.Log("Using Pomegranate Seed.");
+                planting.PlantSeed("pomegranate");
+                break;
+            case 6:
+                Debug.Log("Using Bay Seed.");
+                planting.PlantSeed("bay");
+                break;
         }
     }
 }

@@ -11,7 +11,7 @@ public class ToolbarController : MonoBehaviour
     }
 
     public ToolbarItem[] toolbarItems; // Array of toolbar items
-    private int selectedIndex = 0;    // Index of the currently selected item (-1 for none)
+    public int selectedIndex = 0;    // Index of the currently selected item (-1 for none)
 
     void Start()
     {
