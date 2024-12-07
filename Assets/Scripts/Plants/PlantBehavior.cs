@@ -1,4 +1,4 @@
-
+﻿using System;
 using UnityEngine;
 
 public class PlantBehavior : MonoBehaviour
@@ -10,6 +10,10 @@ public class PlantBehavior : MonoBehaviour
     [SerializeField] private float growthTime = 5f;
     [SerializeField] private bool isAlive = true;
     [SerializeField] private Vector3 position;
+    [SerializeField] private SpriteRenderer plantSpriteRenderer;
+    [SerializeField] private Sprite seedSprite;
+    [SerializeField] private Sprite sproutSprite;
+    [SerializeField] private Sprite matureSprite;
 
     private float growthTimer = 0f;
 
@@ -17,6 +21,7 @@ public class PlantBehavior : MonoBehaviour
     {
         position = transform.position;
         StartGrowth();
+        UpdateAppearance();
     }
 
     public void StartGrowth()
@@ -27,31 +32,27 @@ public class PlantBehavior : MonoBehaviour
 
     public void Damage(int amount)
     {
-        if (isAlive)
+        health -= amount;
+        UpdateHealthBar();
+
+        if (health <= 0)
         {
-            health -= amount;
-            PlayDamageAnimation();
-            UpdateHealthBar();
-            if (health <= 0)
-            {
-                isAlive = false;
-            }
+            Destroy(gameObject); // Destroys the GameObject when health is zero or less
         }
     }
 
     public void Harvest()
     {
-        if (isAlive)
-        {
-            UpdateInventory();
-            TriggerHarvestAnimation();
-        }
+        UpdateInventory();
+        Destroy(gameObject);
+
     }
 
     void Update()
     {
         if (isAlive)
         {
+            Console.WriteLine(Time.deltaTime);
             growthTimer += Time.deltaTime;
             CheckGrowthProgress();
         }
@@ -68,15 +69,31 @@ public class PlantBehavior : MonoBehaviour
 
     private void ProgressGrowthStage()
     {
-        if (growthStage == GrowthStage.Seed) 
+        if (growthStage == GrowthStage.Seed)
             growthStage = GrowthStage.Sprout;
-        else if (growthStage == GrowthStage.Sprout) 
+        else if (growthStage == GrowthStage.Sprout)
             growthStage = GrowthStage.Mature;
+
+        UpdateAppearance();
     }
 
-    private void PlayDamageAnimation()
+    private void UpdateAppearance()
     {
-        // Trigger damage animation logic
+        if (plantSpriteRenderer != null)
+        {
+            switch (growthStage)
+            {
+                case GrowthStage.Seed:
+                    plantSpriteRenderer.sprite = seedSprite;
+                    break;
+                case GrowthStage.Sprout:
+                    plantSpriteRenderer.sprite = sproutSprite;
+                    break;
+                case GrowthStage.Mature:
+                    plantSpriteRenderer.sprite = matureSprite;
+                    break;
+            }
+        }
     }
 
     private void UpdateHealthBar()
@@ -86,11 +103,6 @@ public class PlantBehavior : MonoBehaviour
 
     private void UpdateInventory()
     {
-        // Logic to update resource inventory
-    }
-
-    private void TriggerHarvestAnimation()
-    {
-        // Trigger harvest animation logic
+        //TODO kaynakları arttırma ekle
     }
 }
