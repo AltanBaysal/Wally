@@ -3,32 +3,25 @@ using UnityEngine;
 
 public enum TowerType { SingleTarget, AoE }
 
-public class TowerController : MonoBehaviour
+public class TowerController : MonoBehaviour, HealthManager
 {
-    [SerializeField] private int health = 100;
+    [SerializeField] private float health = 100;
     [SerializeField] private int damage = 25;
     [SerializeField] private float attackRange = 10f;
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private TowerType towerType;
-    [SerializeField] private bool isActive = true;
 
     private float attackTimer = 0f;
 
-    void Start()
-    {
-        isActive = true;
-    }
-
+  
     void Update()
     {
-        if (isActive)
-        {
             attackTimer += Time.deltaTime;
             CheckForEnemies();
-        }
+        
     }
 
-    public void TakeDamage(int damageTaken)
+    public void TakeDamage(float damageTaken)
     {
         health -= damageTaken;
         if (health <= 0)
@@ -72,7 +65,7 @@ public class TowerController : MonoBehaviour
 
     private void DestroyTower()
     {
-        isActive = false;
+        
         // Optional: Play destruction animation or effects here
         Destroy(gameObject);
     }
