@@ -1,23 +1,24 @@
-
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum TargetChoice
 {
-    Player,
-    Structures
+    Plant,
+    Tower,
+    Both
 }
 
 public class EnemyBehaviorAI : MonoBehaviour
 {
     [SerializeField]
-    private float aggressionLevel = 1.0f;
-    [SerializeField]
-    private int retreatThreshold = 20;
-    [SerializeField]
-    private TargetChoice targetChoice = TargetChoice.Player;
+    private TargetChoice targetChoice = TargetChoice.Plant;
+    private GameObject currentTarget;
 
-    private int currentHealth = 100;
-    private bool isRetreating = false;
+    [SerializeField]
+    private float attackRange = 2.0f;
+    [SerializeField]
+    private float attackDamage = 10.0f;
+    [SerializeField] private float movementSpeed = 3f;
 
     void Update()
     {
@@ -26,56 +27,88 @@ public class EnemyBehaviorAI : MonoBehaviour
 
     public void DecideNextAction()
     {
-        if (currentHealth <= retreatThreshold)
+        if (currentTarget == null || !IsTargetAlive(currentTarget))
         {
-            SwitchToRetreatBehavior();
+            FindNewTarget();
         }
-        else if (IsPlayerNearby())
+        else if (IsTargetInRange())
         {
-            AggressiveBehavior();
+            AttackTarget();
         }
-    }
-
-    private void SwitchToRetreatBehavior()
-    {
-        if (!isRetreating)
+        else
         {
-            isRetreating = true;
-            // Implement retreat behavior logic, e.g., change movement speed, flee direction, etc.
-            Debug.Log("Switching to retreat behavior");
+            MoveTowardsTarget();
         }
     }
 
-    private void AggressiveBehavior()
+
+    private bool IsTargetAlive(GameObject target)
     {
-        if (aggressionLevel > 0)
+        // Check if the target is alive or destroyed
+        return target != null;
+    }
+
+    private void FindNewTarget()
+    {
+        GameObject[] potentialTargets;
+
+
+        if (targetChoice == TargetChoice.Plant)
         {
-            // Implement aggressive behavior logic, e.g., increase attack rate, deal more damage, etc.
-            Debug.Log("Executing aggressive behavior");
-            EnhanceStats();
-            TriggerCombatEvents();
+            potentialTargets = GameObject.FindGameObjectsWithTag("Plant");
+        }
+        else if (targetChoice == TargetChoice.Both)
+        {
+            potentialTargets = GameObject.FindGameObjectsWithTag("Plant");
+            potentialTargets.AddRange(GameObject.FindGameObjectsWithTag("Tower"));
+        }
+        else
+        {
+            potentialTargets = GameObject.FindGameObjectsWithTag("Tower");
+        }
+
+        float closestDistance = float.MaxValue;
+
+        foreach (var target in potentialTargets)
+        {
+            float distance = Vector3.Distance(transform.position, target.transform.position);
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                currentTarget = target;
+            }
+        }
+
+        if (currentTarget != null)
+        {
+            Debug.Log($"New target acquired: {currentTarget.name}");
+        }
+        else
+        {
+            Debug.Log("No valid targets found");
         }
     }
 
-    private bool IsPlayerNearby()
+    private bool IsTargetInRange()
     {
-        // Placeholder for detecting player proximity logic
-        return Vector3.Distance(transform.position, FindObjectOfType<PlayerMovement>().transform.position) < 10f;
+        if (currentTarget == null) return false;
+
+        return Vector3.Distance(transform.position, currentTarget.transform.position) <= attackRange;
     }
 
-    private void EnhanceStats()
+    private void AttackTarget()
     {
-        // Logic to enhance enemy stats
+        Debug.Log($"Attacking {currentTarget.name}");
+        // Implement attack logic, e.g., deal damage to the target
+        currentTarget.GetComponent<HealthManager>()?.TakeDamage(attackDamage);
     }
 
-    private void TriggerCombatEvents()
+    private void MoveTowardsTarget()
     {
-        // Logic to trigger combat-related events
-    }
+        if (currentTarget == null) return;
 
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        Debug.Log($"Current Health: {currentHealth}");
+        transform.position = Vector3.MoveTowards(transform.position, currentTarget.transform.position, Time.deltaTime * movementSpeed);
+        Debug.Log($"Moving towards {currentTarget.name}");
     }
 }
