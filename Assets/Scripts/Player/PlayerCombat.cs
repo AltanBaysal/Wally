@@ -1,60 +1,41 @@
-
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Combat Settings")]
-    [SerializeField] private float weaponRange = 5f;
-    [SerializeField] private float attackCooldown = 1f;
-    private PlayerCombat currentWeapon;
+    [SerializeField] private GameObject bulletPrefab; // Mermi prefab'ý
+    [SerializeField] private Vector3 bulletOffset = new Vector3(0, 1.5f, 0); // Oyuncunun üst kýsmý için ofset
+    [SerializeField] private float attackCooldown = 0.5f;
+
     private float lastAttackTime;
 
     private void Update()
     {
-        // Check for mouse input to initiate attacks against enemies within range.
         if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + attackCooldown)
         {
-            FireWeapon();
+            ShootBullet();
         }
     }
 
-    private void FireWeapon()
+    private void ShootBullet()
     {
-        // Trigger the attack animation
-        if (currentWeapon != null)
+        // Mouse'un dünya koordinatýndaki pozisyonunu al
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
+        mousePosition.z = 0f; // 2D oyun için Z koordinatýný sýfýrla
+
+        // Mermiyi oyuncunun üst kýsmýndan spawnla
+        Vector3 bulletSpawnPosition = transform.position;
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+
+        // Mermiye hedef pozisyonunu ilet
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        if (bulletScript != null)
         {
-            //currentWeapon.TriggerAttackAnimation();
-            DamageEnemiesInRange();
-            lastAttackTime = Time.time;
+            bulletScript.Initialize(mousePosition);
         }
-    }
 
-    private void DamageEnemiesInRange()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, weaponRange);
-        foreach (Collider hitCollider in hitColliders)
-        {
-            EnemyController enemy = hitCollider.GetComponent<EnemyController>();
-            if (enemy != null)
-            {
-                //enemy.DealDamage(currentWeapon.GetDamage());
-            }
-        }
-    }
-
-    public void EquipWeapon(PlayerCombat newWeapon)
-    {
-        currentWeapon = newWeapon;
-        //ChangeAnimationState(currentWeapon.GetAnimationState());
-    }
-
-    private void ChangeAnimationState(string newState)
-    {
-        // Code to change the animation state, assuming you have an Animator component
-        Animator animator = GetComponent<Animator>();
-        if (animator != null)
-        {
-            animator.Play(newState);
-        }
+        // Son saldýrý zamanýný güncelle
+        lastAttackTime = Time.time;
     }
 }
