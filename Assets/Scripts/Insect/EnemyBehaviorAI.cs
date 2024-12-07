@@ -20,6 +20,10 @@ public class EnemyBehaviorAI : MonoBehaviour
     private float attackDamage = 10.0f;
     [SerializeField] private float movementSpeed = 3f;
 
+    [SerializeField]
+    private float attackCooldown = 1.0f; // Cooldown time in seconds
+    private float lastAttackTime = 0f; // Track the time of the last attack
+
     void Update()
     {
         DecideNextAction();
@@ -33,14 +37,16 @@ public class EnemyBehaviorAI : MonoBehaviour
         }
         else if (IsTargetInRange())
         {
-            AttackTarget();
+            if (Time.time - lastAttackTime >= attackCooldown) // Check if cooldown has passed
+            {
+                AttackTarget();
+            }
         }
         else
         {
             MoveTowardsTarget();
         }
     }
-
 
     private bool IsTargetAlive(GameObject target)
     {
@@ -51,7 +57,6 @@ public class EnemyBehaviorAI : MonoBehaviour
     private void FindNewTarget()
     {
         GameObject[] potentialTargets;
-
 
         if (targetChoice == TargetChoice.Plant)
         {
@@ -100,8 +105,8 @@ public class EnemyBehaviorAI : MonoBehaviour
     private void AttackTarget()
     {
         Debug.Log($"Attacking {currentTarget.name}");
-        // Implement attack logic, e.g., deal damage to the target
         currentTarget.GetComponent<HealthManager>()?.TakeDamage(attackDamage);
+        lastAttackTime = Time.time; // Update the last attack time
     }
 
     private void MoveTowardsTarget()
