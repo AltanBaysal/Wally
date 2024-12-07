@@ -1,4 +1,5 @@
 
+using System.Resources;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -43,7 +44,7 @@ public class PlayerInteraction : MonoBehaviour
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, interactionRange);
             foreach (var hitCollider in hitColliders)
             {
-                ResourceController resource = hitCollider.GetComponent<ResourceController>();
+                ResourceManager resource = hitCollider.GetComponent<ResourceManager>();
                 if (resource != null)
                 {
                     //selectedTool.ToolSpecificAction(resource);

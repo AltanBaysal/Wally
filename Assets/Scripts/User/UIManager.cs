@@ -13,10 +13,6 @@ public class UIManager : MonoBehaviour
     public bool alertActive;
 
     public Animator uiAnimationController;
-    public Text bambooText;
-    public Text laurelText;
-    public Text pomegranateText;
-    public Text oliveText;
     public Text waveTimerText;
     public GameObject alertPanel;
     public Text alertMessageText;
@@ -30,10 +26,6 @@ public class UIManager : MonoBehaviour
 
     public void UpdateResourceDisplay()
     {
-        bambooText.text = "Bamboo: " + bambooCount;
-        laurelText.text = "Laurel: " + laurelCount;
-        pomegranateText.text = "Pomegranate: " + pomegranateCount;
-        oliveText.text = "Olive: " + oliveCount;
     }
 
     public void UpdateWaveTimerDisplay()

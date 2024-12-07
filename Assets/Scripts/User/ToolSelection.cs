@@ -8,12 +8,12 @@ public class ToolSelection : MonoBehaviour
     [SerializeField] private List<string> toolList;
     [SerializeField] private Image selectedToolIcon;
     private int selectedToolIndex;
-    private ResourceController resourceManager;
+    private ResourceManager resourceManager;
     private UIManager uiManager;
 
     private void Awake()
     {
-        resourceManager = FindObjectOfType<ResourceController>();
+        resourceManager = FindObjectOfType<ResourceManager> ();
         uiManager = FindObjectOfType<UIManager>();
     }
 
