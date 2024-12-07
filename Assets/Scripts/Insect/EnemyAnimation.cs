@@ -1,57 +1,36 @@
-
 using UnityEngine;
-
-public enum EnemyType
-{
-    Goblin,
-    Orc,
-    Skeleton
-}
 
 public class EnemyAnimation : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] private EnemyType enemyType;
+    public Animator animator;
+    private Vector2 movementDirection;
 
-    private void Start()
+    private void Update()
     {
-        InitializeAnimator();
-    }
-
-    private void InitializeAnimator()
-    {
-        switch (enemyType)
+        // Get the movement direction from the EnemyBehaviorAI (based on movement towards target)
+        EnemyBehaviorAI enemyBehavior = GetComponent<EnemyBehaviorAI>();
+        if (enemyBehavior != null && enemyBehavior.currentTarget != null)
         {
-            case EnemyType.Goblin:
-                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/GoblinController");
-                break;
-            case EnemyType.Orc:
-                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/OrcController");
-                break;
-            case EnemyType.Skeleton:
-                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkeletonController");
-                break;
+            Vector3 directionToTarget = (enemyBehavior.currentTarget.transform.position - transform.position).normalized;
+            movementDirection = new Vector2(directionToTarget.x, directionToTarget.y);
         }
+        else
+        {
+            movementDirection = Vector2.zero;  // No movement if no target
+        }
+
+        // Update the animation based on movement direction
+        UpdateAnimation(movementDirection);
     }
 
-    public void PlayIdleAnimation()
+    public void UpdateAnimation(Vector2 direction)
     {
-        animator.SetTrigger("Idle");
-    }
+        // Ensure we pass normalized values to the animator for smooth transitions
+        float horizontal = Mathf.Clamp(direction.x, -1f, 1f);
+        float vertical = Mathf.Clamp(direction.y, -1f, 1f);
 
-    public void PlayMoveAnimation()
-    {
-        animator.SetTrigger("Move");
-    }
-
-    public void PlayAttackAnimation()
-    {
-        animator.SetTrigger("Attack");
-        //SoundManager.Instance.PlayAttackSound();
-    }
-
-    public void PlayDeathAnimation()
-    {
-        animator.SetTrigger("Death");
+        // Set the animator parameters for blend tree
+        animator.SetFloat("Horizontal", horizontal);
+        animator.SetFloat("Vertical", vertical);
     }
 }

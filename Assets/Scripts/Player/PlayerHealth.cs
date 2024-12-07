@@ -6,13 +6,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 100;
     private int currentHealth;
     private UIManager uiManager;
-    private GameManager gameManager;
 
     private void Start()
     {
         currentHealth = maxHealth;
         uiManager = FindObjectOfType<UIManager>();
-        gameManager = FindObjectOfType<GameManager>();
         UpdateHealthUI();
     }
 
