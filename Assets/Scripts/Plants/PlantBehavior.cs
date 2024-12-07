@@ -1,25 +1,25 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlantBehavior : MonoBehaviour
+public class PlantBehavior : MonoBehaviour, HealthManager
 {
     public enum GrowthStage { Seed, Sprout, Mature }
 
-    [SerializeField] private int health = 100;
-    [SerializeField] private GrowthStage growthStage = GrowthStage.Seed;
+    [SerializeField] private float health = 100;
+    [SerializeField] public GrowthStage growthStage = GrowthStage.Seed;
     [SerializeField] private float growthTime = 5f;
     [SerializeField] private bool isAlive = true;
-    [SerializeField] private Vector3 position;
     [SerializeField] private SpriteRenderer plantSpriteRenderer;
     [SerializeField] private Sprite seedSprite;
     [SerializeField] private Sprite sproutSprite;
     [SerializeField] private Sprite matureSprite;
+    [SerializeField] public string plantName;
 
     private float growthTimer = 0f;
 
     void Start()
     {
-        position = transform.position;
+       
         StartGrowth();
         UpdateAppearance();
     }
@@ -30,7 +30,7 @@ public class PlantBehavior : MonoBehaviour
         growthTimer = 0f;
     }
 
-    public void Damage(int amount)
+    public void TakeDamage(float amount)
     {
         health -= amount;
         UpdateHealthBar();
