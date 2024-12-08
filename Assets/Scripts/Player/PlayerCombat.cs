@@ -3,6 +3,7 @@
 public class PlayerCombat : MonoBehaviour
 {
     public GameObject bulletPrefab; // Mermi prefab'ı
+    public GameObject firePoint;
 
     public void Shoot()
     {
@@ -11,7 +12,7 @@ public class PlayerCombat : MonoBehaviour
         mousePosition.z = 0; // Z eksenini sıfırlıyoruz çünkü 2D'de Z değeri önemli değil.
 
         // Mermi oluşturma
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, Quaternion.identity);
 
         // Merminin hareket yönünü hesapla
         Vector3 direction = (mousePosition - transform.position).normalized;

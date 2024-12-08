@@ -14,14 +14,6 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] public ResourceManager resourceManager;
     [SerializeField] private GameObject towerPrefab;
 
-    // Reference to UI Manager
-    private UIManager uiManager;
-
-    private void Awake()
-    {
-        uiManager = FindObjectOfType<UIManager>();
-    }
-
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) // Left mouse button
